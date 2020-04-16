@@ -1,0 +1,19 @@
+from surprise import NMF
+from surprise import Dataset
+from surprise.model_selection import cross_validate
+
+# Load the movielens-100k dataset (download it if needed).
+data = Dataset.load_builtin('ml-100k')
+
+# Use the famous SVD algorithm.
+algo = NMF()
+
+# Run 5-fold cross-validation and print results.
+cross_validate(algo, data, measures=['RMSE', 'MAE'], cv=10, verbose=True)
+
+
+                  Fold 1  Fold 2  Fold 3  Fold 4  Fold 5  Fold 6  Fold 7  Fold 8  Fold 9  Fold 10 Mean    Std     
+RMSE (testset)    0.9586  0.9560  0.9588  0.9612  0.9568  0.9695  0.9580  0.9567  0.9614  0.9375  0.9575  0.0076  
+MAE (testset)     0.7550  0.7546  0.7532  0.7573  0.7553  0.7620  0.7548  0.7517  0.7573  0.7392  0.7540  0.0056  
+Fit time          4.36    4.33    4.36    4.37    4.34    4.32    4.36    4.52    4.40    4.40    4.38    0.05    
+Test time         0.05    0.04    0.04    0.04    0.05    0.04    0.04    0.04    0.04    0.04    0.04    0.00  
